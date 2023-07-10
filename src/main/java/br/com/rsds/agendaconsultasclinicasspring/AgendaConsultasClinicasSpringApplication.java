@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import br.com.rsds.agendaconsultasclinicasspring.model.Consulta;
 import br.com.rsds.agendaconsultasclinicasspring.model.Especialista;
 import br.com.rsds.agendaconsultasclinicasspring.model.Paciente;
-import br.com.rsds.agendaconsultasclinicasspring.repository.ConsultaRepository;
+import br.com.rsds.agendaconsultasclinicasspring.repository.PacienteRepository;
 
 @SpringBootApplication
 public class AgendaConsultasClinicasSpringApplication {
@@ -18,23 +18,20 @@ public class AgendaConsultasClinicasSpringApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDataBase(ConsultaRepository consultaRepository) {
+	CommandLineRunner initDataBase(PacienteRepository pacienteRepository) {
 		return args -> {
-			consultaRepository.deleteAll();
+			pacienteRepository.deleteAll();
+
+			Especialista especialista = new Especialista();
 
 			Paciente paciente = new Paciente();
 
 			Consulta consulta = new Consulta();
-			consulta.setPaciente(paciente);
-
-			Especialista especialista = new Especialista();
-			especialista.getConsulta().add(consulta);
-
+			consulta.setPacientes(paciente);
 			consulta.setEspecialista(especialista);
 
 			paciente.getConsulta().add(consulta);
-
-			consultaRepository.save(consulta);
+			pacienteRepository.save(paciente);
 		};
 	}
 }

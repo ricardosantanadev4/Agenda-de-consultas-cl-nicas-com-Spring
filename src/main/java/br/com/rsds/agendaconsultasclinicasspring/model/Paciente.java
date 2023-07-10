@@ -14,10 +14,11 @@ import lombok.Data;
 @Entity
 @Data
 public class Paciente {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@OneToMany(mappedBy = "paciente", orphanRemoval = true, cascade = CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pacientes")
 	private List<Consulta> consulta = new ArrayList<>();
 }
