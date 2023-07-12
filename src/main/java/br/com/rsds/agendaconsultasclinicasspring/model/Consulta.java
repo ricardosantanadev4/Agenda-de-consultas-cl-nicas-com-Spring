@@ -1,5 +1,8 @@
 package br.com.rsds.agendaconsultasclinicasspring.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,4 +27,10 @@ public class Consulta {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Especialista especialista;
+
+	private LocalDate dataCriacao;
+
+	private LocalDate dataAtendimento;
+
+	private LocalTime horarioAtendimento;
 }
