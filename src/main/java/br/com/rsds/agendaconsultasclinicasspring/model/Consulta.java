@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -21,16 +23,25 @@ public class Consulta {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "paciente_id")
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente pacientes;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@NotNull
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "especialista_id", nullable = false)
 	private Especialista especialista;
 
+	@NotNull
+	@Column(nullable = false, length = 10)
 	private LocalDate dataCriacao;
 
+	@NotNull
+	@Column(nullable = false, length = 10)
 	private LocalDate dataAtendimento;
 
+	@NotNull
+	@Column(nullable = false, length = 10)
 	private LocalTime horarioAtendimento;
 }

@@ -30,9 +30,13 @@ public class AgendaConsultasClinicasSpringApplication {
 			final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 			Especialista especialista = new Especialista();
+			especialista.setName("Dotor Alexandre");
+			especialista.setEspecialidade("CARDIOLOGISTA");
+			especialista.setDataDisponivel(LocalDate.parse("31/07/2023", dateFormatter));
+			especialista.setHorarioDisponivel(LocalTime.parse("13:30:00", timeFormatter));
 
 			Paciente paciente = new Paciente();
-			paciente.setNome("Ricardo");
+			paciente.setName("Ricardo");
 			paciente.setRg("7777777");
 			paciente.setTelefone("99999999999");
 			paciente.setDataNascimento(LocalDate.parse("18/12/1989", dateFormatter));
@@ -41,8 +45,10 @@ public class AgendaConsultasClinicasSpringApplication {
 			consulta.setPacientes(paciente);
 			consulta.setEspecialista(especialista);
 			consulta.setDataCriacao(LocalDate.now());
-			consulta.setDataAtendimento(LocalDate.parse("31/07/2023", dateFormatter));
-			consulta.setHorarioAtendimento(LocalTime.parse("13:30:00", timeFormatter));
+			consulta.setDataAtendimento(especialista.getDataDisponivel());
+			consulta.setHorarioAtendimento(especialista.getHorarioDisponivel());
+
+			especialista.getConsulta().add(consulta);
 
 			paciente.getConsulta().add(consulta);
 			pacienteRepository.save(paciente);

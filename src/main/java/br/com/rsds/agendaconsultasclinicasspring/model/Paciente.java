@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -24,16 +25,18 @@ public class Paciente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotBlank
 	@NotNull
 	@Length(min = 1, max = 100)
 	@Column(nullable = false, length = 100)
-	private String nome;
+	private String name;
 
 	@NotNull
 	@Length(min = 7, max = 7)
 	@Column(nullable = false, length = 7)
 	private String rg;
 
+	@NotBlank
 	@NotNull
 	@Length(min = 11, max = 11)
 	@Column(nullable = false, length = 11)
@@ -44,6 +47,7 @@ public class Paciente {
 	private LocalDate dataNascimento;
 
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pacientes")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pacientes")
+	@Column(nullable = false)
 	private List<Consulta> consulta = new ArrayList<>();
 }
