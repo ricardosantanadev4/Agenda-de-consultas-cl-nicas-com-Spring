@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.rsds.agendaconsultasclinicasspring.enums.EspecialidadeEspecilista;
 import br.com.rsds.agendaconsultasclinicasspring.model.Consulta;
 import br.com.rsds.agendaconsultasclinicasspring.model.Especialista;
 import br.com.rsds.agendaconsultasclinicasspring.model.Paciente;
@@ -31,7 +32,7 @@ public class AgendaConsultasClinicasSpringApplication {
 
 			Especialista especialista = new Especialista();
 			especialista.setName("Dotor Alexandre");
-			especialista.setEspecialidade("CARDIOLOGISTA");
+			especialista.setEspecialidade(EspecialidadeEspecilista.CARDIOLOGISTA);
 			especialista.setDataDisponivel(LocalDate.parse("31/07/2023", dateFormatter));
 			especialista.setHorarioDisponivel(LocalTime.parse("13:30:00", timeFormatter));
 

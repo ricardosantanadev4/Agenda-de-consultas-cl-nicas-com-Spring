@@ -7,7 +7,12 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.rsds.agendaconsultasclinicasspring.enums.EspecialidadeEspecilista;
+import br.com.rsds.agendaconsultasclinicasspring.enums.StatusEspecialista;
+import br.com.rsds.agendaconsultasclinicasspring.enums.converters.EspecialidadeEspecialistaConverter;
+import br.com.rsds.agendaconsultasclinicasspring.enums.converters.StatusEspecialistaConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,11 +36,10 @@ public class Especialista {
 	@Column(nullable = false, length = 100)
 	private String name;
 
-	@NotBlank
 	@NotNull
-	@Length(min = 8, max = 13)
 	@Column(nullable = false, length = 13)
-	private String especialidade;
+	@Convert(converter = EspecialidadeEspecialistaConverter.class)
+	private EspecialidadeEspecilista especialidade;
 
 	@NotNull
 	@Column(nullable = false, length = 10)
@@ -45,11 +49,10 @@ public class Especialista {
 	@Column(nullable = false, length = 10)
 	private LocalTime horarioDisponivel;
 
-	@NotBlank
 	@NotNull
-	@Length(min = 10, max = 12)
 	@Column(nullable = false, length = 12)
-	private String status = "INDISPONIVEL";
+	@Convert(converter = StatusEspecialistaConverter.class)
+	private StatusEspecialista status = StatusEspecialista.INDISPONIVEL;
 
 	@OneToMany(mappedBy = ("especialista"))
 	@NotNull
