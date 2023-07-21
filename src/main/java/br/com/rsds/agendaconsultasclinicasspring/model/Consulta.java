@@ -3,8 +3,11 @@ package br.com.rsds.agendaconsultasclinicasspring.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import br.com.rsds.agendaconsultasclinicasspring.enums.StatusConsulta;
+import br.com.rsds.agendaconsultasclinicasspring.enums.converters.StatusConsultaConverter;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -44,4 +47,9 @@ public class Consulta {
 	@NotNull
 	@Column(nullable = false, length = 10)
 	private LocalTime horarioAtendimento;
+
+	@NotNull
+	@Column(nullable = false, length = 9)
+	@Convert(converter = StatusConsultaConverter.class)
+	private StatusConsulta statusConsulta = StatusConsulta.AGENDADO;
 }
