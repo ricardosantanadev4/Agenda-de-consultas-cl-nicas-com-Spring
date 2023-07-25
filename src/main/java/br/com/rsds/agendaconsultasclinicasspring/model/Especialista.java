@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import br.com.rsds.agendaconsultasclinicasspring.enums.EspecialidadeEspecilista;
 import br.com.rsds.agendaconsultasclinicasspring.enums.StatusEspecialista;
 import br.com.rsds.agendaconsultasclinicasspring.enums.converters.EspecialidadeEspecialistaConverter;
@@ -54,8 +57,9 @@ public class Especialista {
 	@Convert(converter = StatusEspecialistaConverter.class)
 	private StatusEspecialista status = StatusEspecialista.INDISPONIVEL;
 
-	@OneToMany(mappedBy = ("especialista"))
+	@OneToMany(mappedBy = "especialista")
 	@NotNull
 	@Column(nullable = false)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<Consulta> consulta = new ArrayList<>();
 }

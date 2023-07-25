@@ -3,6 +3,9 @@ package br.com.rsds.agendaconsultasclinicasspring.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import br.com.rsds.agendaconsultasclinicasspring.enums.StatusConsulta;
 import br.com.rsds.agendaconsultasclinicasspring.enums.converters.StatusConsultaConverter;
 import jakarta.persistence.CascadeType;
@@ -29,6 +32,7 @@ public class Consulta {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "paciente_id", nullable = false)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Paciente pacientes;
 
 	@NotNull
