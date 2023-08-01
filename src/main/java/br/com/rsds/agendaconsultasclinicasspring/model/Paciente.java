@@ -47,7 +47,7 @@ public class Paciente {
 	private LocalDate dataNascimento;
 
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pacientes")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "paciente")
 	@Column(nullable = false)
 	private List<Consulta> consulta = new ArrayList<>();
 }

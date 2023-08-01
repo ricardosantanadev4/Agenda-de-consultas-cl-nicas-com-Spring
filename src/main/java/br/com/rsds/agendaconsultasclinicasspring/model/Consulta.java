@@ -33,7 +33,7 @@ public class Consulta {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "paciente_id", nullable = false)
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Paciente pacientes;
+	private Paciente paciente;
 
 	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)

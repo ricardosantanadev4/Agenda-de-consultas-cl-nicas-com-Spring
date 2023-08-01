@@ -43,7 +43,7 @@ public class AgendaConsultasClinicasSpringApplication {
 			paciente.setDataNascimento(LocalDate.parse("18/12/1989", dateFormatter));
 
 			Consulta consulta = new Consulta();
-			consulta.setPacientes(paciente);
+			consulta.setPaciente(paciente);
 			consulta.setEspecialista(especialista);
 			consulta.setDataCriacao(LocalDate.now());
 			consulta.setDataAtendimento(especialista.getDataDisponivel());
